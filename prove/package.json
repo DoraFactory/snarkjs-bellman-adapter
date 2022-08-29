@@ -1,0 +1,18 @@
+{
+  "name": "snarkjs-prove",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "VegeBun-csj",
+  "license": "ISC",
+  "dependencies": {
+    "@iden3/binfileutils": "^0.0.11",
+    "blake2b-wasm": "^2.4.0",
+    "ffjavascript": "^0.2.55",
+    "logplease": "^1.2.15"
+  }
+}
