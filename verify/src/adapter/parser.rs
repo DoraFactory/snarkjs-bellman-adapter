@@ -4,10 +4,10 @@ use bellman::groth16::{
 use pairing::{Engine};
 use bls12_381::{Bls12, G1Affine, G2Affine};
 use ff::PrimeFieldBits;
+use super::{ProofStr, VkeyStr};
 use std::str::FromStr;
 use std::path::PathBuf;
 use std::fs;
-use super::{ProofStr, VkeyStr};
 
 pub fn parse_proof<E>() -> Proof<E>
 where

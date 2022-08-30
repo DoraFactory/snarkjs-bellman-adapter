@@ -1,6 +1,4 @@
 use serde::{Deserialize, Serialize};
-use std::fs::File;
-use std::io::Read;
 
 #[derive(Serialize, Deserialize)]
 pub struct ProofStr {
