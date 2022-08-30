@@ -16,48 +16,46 @@ So, we can use this adapter to get below benefits:
 ## prerequirement
 > we know snarkjs support `bn128` and `bls12_381` curve. Bellman support only `bls12_381` curve. So we choose `bls12_381` curve. So, `if you developed the zk application by bn128 curve in the past, you only need to change the curve to bls12_381`.
 
-Complete the [tutorial](https://github.com/iden3/snarkjs/blob/master/README.md) of snarkjs.(This tutorial operates in bn128)
+### 1. install the snarkJs
+```
+npm install -g snarkjs@latest
+```
 
-**Attention: recommend to install circom by the latest source code and compile it into the executable file `circom`**.
+### 2. install the circom compiler
+**Attention: recommend to install circom by the latest source code and compile it into the executable file `circom`. Don't install it by the npm which is not the latest library**.
 ```
 git clone https://github.com/iden3/circom.git
 cargo build --release
 ```
+**Also, you need to set `circom` as a global command.**
 
-## Using of this adapter
+### 3. prepare a circuit and inputs
+- write a circuit named `circuit.circom` by circom (In the dir `circuit`, we write a simple circuit about `a * b = c`, which we want to prove that we know two numbers whose product is `33`)
+- write an inputs file named `inputs.json`(This file contains two number which we know but we don't want the verifier know)
+> if you are interested in it, you can change it to `{"a": 1, "b": 33}` to generate a proof, you can find it will be verifed correctly too.
+
+## Usage of adatper
 ### 1. Generate zk proof of BLS12_381 curve
-Following the [tutorial](https://github.com/iden3/snarkjs/blob/master/README.md) of sanrkjs, we need to modify some steps to generate the proof of `bls12_381`
 
-- step1: 
+generate proof and verification key by the `circuit.circom` and `inputs.json` in the dir `circuit` of this project by `start.sh`.
 ```
-snarkjs powersoftau new bls12_381 12 pot12_0000.ptau -v
-```
-- step4:
-```
-snarkjs powersoftau challenge contribute bls12_381 challenge_0003 response_0003 -e="some random text"
-```
-- step10
-```
-circom circuit.circom --r1cs --wasm --sym -p bls12381
-```
-- step18
-```
-snarkjs zkey bellman contribute bls12_381 challenge_phase2_0003 response_phase2_0003 -e="some random text"
+./start.sh
 ```
 
-If you modify the above d in snakjs's tutorial, you can generate a proof of bls_381 curve.
 
 ### 2. Decode the proof into uncompressed data
 You have generated `proof.json` and `verification_key.json`，you can go to the directory `prove` and run these command:
 ```
+cd prove
 npm install
-node adapter.js
+cd src && node adapter.js
 ```
 After that, you can see the generated uncompressed data file `proof_uncompressed.json` and `vkey_uncompressed.json`.
 
 ### 3. Encode the uncompressed data into Affine and Verify
 Go to the directory `verify/src/adapter` and run the test:
 ```
+cd ../../verify/src/adapter
 cargo test snark_proof_bellman_verify -- --nocapture
 ```
 if you see the below output, which means the verification passed.
@@ -70,3 +68,8 @@ test adapter::snark_proof_bellman_verify ... ok
 
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
 ```
+
+## Customize zk circuit and verify
+if you want to use this adapter, you need to:
+- modify the `circuit.circom` and `inputs.json` in the dir `circuit`
+- modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` in the `verify/src/adapter/mod.rs`
