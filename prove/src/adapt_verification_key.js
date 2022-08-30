@@ -45,8 +45,10 @@ async function groth16Vk (zkey, fd, sections) {
     vkey.gamma_2 = Array.from(gamma2_uncompressed);
     vkey.delta_2 = Array.from(delta2_uncompressed);
     vkey.ic = ic;
-    console.log(vkey);
     fs.writeFileSync(path.resolve("../../circuit/vkey_uncompressed.json"), JSON.stringify(vkey));
+
+    console.log(`generate uncompressed veky successfully!`);
+    process.exit()
 }
 
 generate_verification_key("../../circuit/circuit_final.zkey")

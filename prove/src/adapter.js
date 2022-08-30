@@ -16,11 +16,6 @@ const adaptToUncompressed = async (verificationKeyName, proofName) => {
 
     const curve = await curves.getCurveFromName(vkey.curve);
 
-    console.log(curve);
-
-    console.log("这是");
-    console.log(curve.G1.fromObject(proof.pi_a));
-    
     // convert u8 array(little-endian order)to uncompressed type(big-endian order and on bls12_381 curve) 
     // which can be convert into Affine type in bellman
     const pi_a = curve.G1.toUncompressed(curve.G1.fromObject(proof.pi_a));
@@ -53,6 +48,8 @@ const adaptToUncompressed = async (verificationKeyName, proofName) => {
     fs.writeFileSync(path.resolve("../../circuit/proof_uncompressed.json"), JSON.stringify(uncompressed_proof));
     fs.writeFileSync(path.resolve("../../circuit/vkey_uncompressed.json"), JSON.stringify(uncompressed_vkey));
 
+    console.log(`generate uncompressed proof and verification data successfully!`);
+    process.exit();
 }
 
 

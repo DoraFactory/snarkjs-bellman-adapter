@@ -132,6 +132,8 @@ const generate_proof = async(witnessFileName, zkeyFileName, logger) => {
     await fdZKey.close();
     await fdWtns.close();
 
+    console.log(`generate uncompressed proof data successfully!`);
+    process.exit()
 }
 
 generate_proof("../../circuit/witness.wtns", "../../circuit/circuit_final.zkey", logger)
