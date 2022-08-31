@@ -47,7 +47,7 @@ cargo build --release
 
 - write a circuit named `circuit.circom` using circom (in the dir `circuit`, we wrote a simple demo circuit of `a * b = c`. We want to prove that we know two numbers whose product is `33`)
 - write an input file named `inputs.json`(This file contains two number which we know but we don't want the verifier to know)
-> if you are interested in it, you can change it to `{"a": 1, "b": 33}` to generate a proof, you can find it will be verifed correctly too.
+> if you are interested in it, you can change it to `{"a": 3, "b": 11}` to generate a proof, you can find it will be verifed correctly too.
 
 ## Use the adapter
 
