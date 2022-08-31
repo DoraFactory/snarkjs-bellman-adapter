@@ -14,7 +14,7 @@ mod circuit;
 use circuit::*;
 
 mod adapter;
-use adapter::snark_proof_bellman_verify;
+// use adapter::snark_proof_bellman_verify;
 
 fn main() {
     // step1

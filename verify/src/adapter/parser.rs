@@ -1,11 +1,9 @@
 use bellman::groth16::{
-    prepare_verifying_key, verify_proof, Proof, VerifyingKey,
+    Proof, VerifyingKey,
 };
 use pairing::{Engine};
-use bls12_381::{Bls12, G1Affine, G2Affine};
-use ff::PrimeFieldBits;
+use bls12_381::{G1Affine, G2Affine};
 use super::{ProofStr, VkeyStr};
-use std::str::FromStr;
 use std::path::PathBuf;
 use std::fs;
 

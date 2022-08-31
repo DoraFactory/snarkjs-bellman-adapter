@@ -65,8 +65,7 @@ Generate proof and verification key with `circuit.circom` and `inputs.json` in t
 You have generated `proof.json` and `verification_key.json`，now you can go to the directory `prove` and run these command:
 
 ```
-cd prove
-npm install
+cd prove && npm install
 cd src && node adapter.js
 ```
 
