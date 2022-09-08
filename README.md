@@ -96,3 +96,21 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 For customized circuits, you need to:
 - modify the `circuit.circom` and `inputs.json` in the dir `circuit`
 - modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` in the `verify/src/adapter/mod.rs`
+
+
+## Bellman-verifier with `no_std`
+
+We have improved `bellman-verifier` to support `no_std` execution environment.
+
+if you want to use bellman to verify the proof in `no_std` environment, you can follow it in your `Cargo.toml`:
+
+```toml
+[dependencies]
+bellman-verifier = { git = "https://github.com/DoraFactory/snarkjs-bellman-adapter.git", default-features = false, version = "0.1.0"}
+
+[features]
+default = ["std"]
+std = [
+	"bellman-verifier/std",
+]
+```

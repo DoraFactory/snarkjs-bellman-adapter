@@ -1,0 +1,21 @@
+[package]
+description = "A zk-SNARK library compatiable with substrate"
+license = "MIT/Apache-2.0"
+name = "bellman-verifier"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+group = { version = "0.12", default-features = false }
+pairing = { version = "0.22", default-features = false }
+codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = [
+	"derive",
+] }
+sp-std = { default-features = false, version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.25" }
+
+[features]
+default = ["std"]
+std = [
+    "codec/std",
+    "sp-std/std",
+]
