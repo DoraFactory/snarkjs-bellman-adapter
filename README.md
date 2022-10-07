@@ -114,3 +114,5 @@ std = [
 	"bellman-verifier/std",
 ]
 ```
+
+> For the Polkadot devs, you need to change the branch of `bellman-verifier` to satisfy your chain's version.
