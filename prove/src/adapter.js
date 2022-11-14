@@ -44,12 +44,39 @@ const adaptToUncompressed = async (verificationKeyName, proofName) => {
     uncompressed_vkey.gamma_2 = Array.from(vk_gamma_2);
     uncompressed_vkey.delta_2 = Array.from(vk_delta_2);
     uncompressed_vkey.ic = ic;
+    
+    let hex_proof = {};
+    let hex_vkey = {};
+    hex_proof.pi_a = '0x'+Bytes2Str( uncompressed_proof.pi_a)
+    hex_proof.pi_b = '0x'+Bytes2Str( uncompressed_proof.pi_b)
+    hex_proof.pi_c = '0x'+Bytes2Str( uncompressed_proof.pi_c)
+    hex_vkey.alpha_1 = '0x'+Bytes2Str( uncompressed_vkey.alpha_1)
+    hex_vkey.beta_2 = '0x'+Bytes2Str( uncompressed_vkey.beta_2)
+    hex_vkey.gamma_2 = '0x'+Bytes2Str( uncompressed_vkey.gamma_2)
+    hex_vkey.delta_2 = '0x'+Bytes2Str( uncompressed_vkey.delta_2)
+    hex_vkey.ic0 = '0x'+Bytes2Str( uncompressed_vkey.ic[0])
+    hex_vkey.ic1 = '0x'+Bytes2Str( uncompressed_vkey.ic[1])
 
     fs.writeFileSync(path.resolve("../../circuit/proof_uncompressed.json"), JSON.stringify(uncompressed_proof));
     fs.writeFileSync(path.resolve("../../circuit/vkey_uncompressed.json"), JSON.stringify(uncompressed_vkey));
+    
+    fs.writeFileSync(path.resolve("../../circuit/proof_hex.json"), JSON.stringify(hex_proof));
+    fs.writeFileSync(path.resolve("../../circuit/vkey_hex.json"), JSON.stringify(hex_vkey));
 
     console.log(`generate uncompressed proof and verification data successfully!`);
     process.exit();
+}
+
+function Bytes2Str(arr) {
+    let str = "";
+    for (let i = 0; i < arr.length; i++) {
+        let tmp = arr[i].toString(16);
+        if (tmp.length == 1) {
+            tmp = "0" + tmp;
+        }
+        str += tmp;
+    }
+    return str;
 }
 
 
