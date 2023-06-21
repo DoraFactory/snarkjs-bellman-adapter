@@ -5,6 +5,12 @@ import * as curves from "../utils/curve.js";
 import { utils } from "ffjavascript";
 const { unstringifyBigInts } = utils;
 
+if (process.argv.length < 3) {
+    console.error("Usage: node adapter.js <circuit-dir-name>");
+    process.exit(1);
+}
+const circuit_dir_name = process.argv[2];
+
 const adaptToUncompressed = async (verificationKeyName, proofName) => {
 
     const verificationKey = JSON.parse(fs.readFileSync(verificationKeyName, "utf8"));
@@ -57,11 +63,11 @@ const adaptToUncompressed = async (verificationKeyName, proofName) => {
     hex_vkey.ic0 = '0x'+Bytes2Str( uncompressed_vkey.ic[0])
     hex_vkey.ic1 = '0x'+Bytes2Str( uncompressed_vkey.ic[1])
 
-    fs.writeFileSync(path.resolve("../../circuit/proof_uncompressed.json"), JSON.stringify(uncompressed_proof));
-    fs.writeFileSync(path.resolve("../../circuit/vkey_uncompressed.json"), JSON.stringify(uncompressed_vkey));
+    fs.writeFileSync(path.resolve(`../../circuit/${circuit_dir_name}/proof_uncompressed.json`), JSON.stringify(uncompressed_proof));
+    fs.writeFileSync(path.resolve(`../../circuit/${circuit_dir_name}/vkey_uncompressed.json`), JSON.stringify(uncompressed_vkey));
     
-    fs.writeFileSync(path.resolve("../../circuit/proof_hex.json"), JSON.stringify(hex_proof));
-    fs.writeFileSync(path.resolve("../../circuit/vkey_hex.json"), JSON.stringify(hex_vkey));
+    fs.writeFileSync(path.resolve(`../../circuit/${circuit_dir_name}/proof_hex.json`), JSON.stringify(hex_proof));
+    fs.writeFileSync(path.resolve(`../../circuit/${circuit_dir_name}/vkey_hex.json`), JSON.stringify(hex_vkey));
 
     console.log(`generate uncompressed proof and verification data successfully!`);
     process.exit();
@@ -79,5 +85,4 @@ function Bytes2Str(arr) {
     return str;
 }
 
-
-adaptToUncompressed("../../circuit/verification_key.json", "../../circuit/proof.json")
+adaptToUncompressed(`../../circuit/${circuit_dir_name}/verification_key.json`, `../../circuit/${circuit_dir_name}/proof.json`)
