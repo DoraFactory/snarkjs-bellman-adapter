@@ -24,7 +24,7 @@ So, the adapter provides the following benefits:
 
 ## Pre-requirements
 
-> we know that SnarkJS supports `bn128` and `bls12_381` curves. Bellman support only `bls12_381` curve. So we choose `bls12_381` curve. So, `if you developed a zk application using bn128 curve in the past, you only need to change the curve to bls12_381`.
+> SnarkJS supports `bn128` and `bls12_381` curves. Bellman support only `bls12_381` curve and Bellman_ce(Community Edition) support `bn128` curve, So you can choose with your requirement.
 
 ### 1. install SnarkJS
 
@@ -51,12 +51,12 @@ cargo build --release
 
 ## Use the adapter
 
-### 1. Generate zk proof of BLS12_381 curve
+### 1. Generate zk proof with curve
 
 Generate proof and verification key with `circuit.circom` and `inputs.json` in the dir `circuit` of this project by `start.sh`.
 
 ```
-./start.sh
+./start.sh Multiplication
 ```
 
 
@@ -66,7 +66,7 @@ You have generated `proof.json` and `verification_key.json`，now you can go to 
 
 ```
 cd prove && npm install
-cd src && node adapter.js
+cd src && node adapter.js Multiplication
 ```
 
 After that, you can see the generated uncompressed data files `proof_uncompressed.json` and `vkey_uncompressed.json`.
@@ -77,7 +77,7 @@ Go to the directory `verify/src/adapter` and run the test:
 
 ```
 cd ../../verify/src/adapter
-cargo test snark_proof_bellman_verify -- --nocapture
+CIRCUIT_DIR_NAME=Multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_bls_verify -- --nocapture
 ```
 
 if you see the below output, which means the verification passed.
