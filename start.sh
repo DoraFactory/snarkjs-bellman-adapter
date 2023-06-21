@@ -4,15 +4,15 @@ compile_and_ts_and_witness() {
   circuit_dir_name=$1
 
   cd ${circuit_dir_name}
-  # start a new powers of tou ceremony(bls12_381)
-  snarkjs powersoftau new bls12_381 12 pot12_0000.ptau -v
+  # start a new powers of tou ceremony(bn128)
+  snarkjs powersoftau new bn128 12 pot12_0000.ptau -v
 
   # contribute to the ceremony
   snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First contribution" -v
   snarkjs powersoftau contribute pot12_0001.ptau pot12_0002.ptau --name="Second contribution" -v -e="some random text"
 
   snarkjs powersoftau export challenge pot12_0002.ptau challenge_0003
-  snarkjs powersoftau challenge contribute bls12_381 challenge_0003 response_0003 -e="some random text"
+  snarkjs powersoftau challenge contribute bn128 challenge_0003 response_0003 -e="some random text"
   snarkjs powersoftau import response pot12_0002.ptau response_0003 pot12_0003.ptau -n="Third contribution name"
 
   # verify the ptau
@@ -27,7 +27,7 @@ compile_and_ts_and_witness() {
 
   echo $(date +"%T") "coompile the circuit into r1cs, wasm and sym"
   itime="$(date -u +%s)"
-  circom circuit.circom --r1cs --wasm --sym -p bls12381
+  circom circuit.circom --r1cs --wasm --sym
   ftime="$(date -u +%s)"
   echo "	($(($(date -u +%s)-$itime))s)"
 
@@ -55,7 +55,7 @@ compile_and_ts_and_witness() {
   snarkjs zkey contribute circuit_0001.zkey circuit_0002.zkey --name="Second contribution Name" -v -e="Another random entropy"
   # Third contribution
   snarkjs zkey export bellman circuit_0002.zkey  challenge_phase2_0003
-  snarkjs zkey bellman contribute bls12_381 challenge_phase2_0003 response_phase2_0003 -e="some random text"
+  snarkjs zkey bellman contribute bn128 challenge_phase2_0003 response_phase2_0003 -e="some random text"
   snarkjs zkey import bellman circuit_0002.zkey response_phase2_0003 circuit_0003.zkey -n="Third contribution name"
 
   # verify the latest key

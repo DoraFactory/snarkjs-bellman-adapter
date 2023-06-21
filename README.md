@@ -58,7 +58,7 @@ Generate proof and verification key with `circuit.circom` and `inputs.json` in t
 ```
 ./start.sh Multiplication
 ```
-
+> The **start.sh** is using BN curve to run, if you want to using bls12381, you can run with **./start_bls.sh Multiplication**
 
 ### 2. Decode the proof into uncompressed data
 
@@ -77,8 +77,9 @@ Go to the directory `verify/src/adapter` and run the test:
 
 ```
 cd ../../verify/src/adapter
-CIRCUIT_DIR_NAME=Multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_bls_verify -- --nocapture
+CIRCUIT_DIR_NAME=Multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_bn_verify -- --nocapture
 ```
+> This is a bn curve verifier tes. If you are using bls12381, you can test with **snark_proof_bellman_bls_verify**.
 
 if you see the below output, which means the verification passed.
 
@@ -95,7 +96,7 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 
 For customized circuits, you need to:
 - modify the `circuit.circom` and `inputs.json` in the dir `circuit`
-- modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` in the `verify/src/adapter/mod.rs`
+- modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` or `Fr::from_str("xxxxxx")` in the `verify/src/adapter/mod.rs`
 
 
 ## Bellman-verifier with `no_std`
