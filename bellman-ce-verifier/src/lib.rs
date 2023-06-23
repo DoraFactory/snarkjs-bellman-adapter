@@ -1,7 +1,8 @@
 use pairing_ce::{CurveAffine, RawEncodable, Engine, GenericCurveProjective, EncodedPoint, GroupDecodingError};
 use codec::{ Encode, Decode };
 
-pub mod verifier;
+mod verifier;
+pub use self::verifier::*;
 
 #[derive(Clone, Encode, Decode, Default, Eq)]
 pub struct Proof<E: Engine> {
