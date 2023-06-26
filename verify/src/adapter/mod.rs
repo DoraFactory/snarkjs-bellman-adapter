@@ -121,10 +121,11 @@ pub fn snark_proof_bellman_bn_verify() {
 
 	let pvk = prepare_verifying_key(&verificationkey);
 
-	let res = verify_proof(&pvk, &pof, &[Frce::from_str(public_input).unwrap()]).is_ok();
-
-	println!("verification passed? {:?}", res);
-
+	assert!(verify_proof(
+		&pvk,
+		&pof,
+		&[Frce::from_str(public_input).unwrap()]
+	).unwrap());
 
 	println!(">>>>end verification<<<<<<<");
 }
