@@ -7,7 +7,7 @@ description = "Bellman verifier using BN1256 curve"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-pairing_ce = { git = "https://github.com/VegeBun-csj/pairing.git" }
+pairing_ce = { git = "https://github.com/matter-labs/pairing.git" }
 codec = { package = "parity-scale-codec", version = "3.0.0", default-features = false, features = [
 	"derive",
 ] }

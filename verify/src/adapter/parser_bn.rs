@@ -33,9 +33,9 @@ E: Engine<G1Affine = G1Affine, G2Affine = G2Affine>
 
     c_arr[..pi_c.len()].copy_from_slice(&pi_c[..]);
 
-    let pia_affine: G1Affine = G1Uncompressed::to_g1_uncompressed(a_arr).into_affine().unwrap();
-    let pib_affine: G2Affine = G2Uncompressed::to_g2_uncompressed(b_arr).into_affine().unwrap();
-    let pic_affine: G1Affine = G1Uncompressed::to_g1_uncompressed(c_arr).into_affine().unwrap();
+    let pia_affine: G1Affine = G1Uncompressed::from_fixed_bytes(a_arr).into_affine().unwrap();
+    let pib_affine: G2Affine = G2Uncompressed::from_fixed_bytes(b_arr).into_affine().unwrap();
+    let pic_affine: G1Affine = G1Uncompressed::from_fixed_bytes(c_arr).into_affine().unwrap();
 
     Proof{
         a: pia_affine,
@@ -81,12 +81,12 @@ E: Engine<G1Affine = G1Affine, G2Affine = G2Affine>
 
     ic_1[..vk_ic[1].len()].copy_from_slice(&vk_ic[1][..]);
 
-    let alpha1_affine = G1Uncompressed::to_g1_uncompressed(alpha1).into_affine().unwrap();
-    let beta2_affine = G2Uncompressed::to_g2_uncompressed(beta2).into_affine().unwrap();
-    let gamma2_affine = G2Uncompressed::to_g2_uncompressed(gamma2).into_affine().unwrap();
-    let delta2_affine = G2Uncompressed::to_g2_uncompressed(delta2).into_affine().unwrap();
-    let ic0_affine = G1Uncompressed::to_g1_uncompressed(ic_0).into_affine().unwrap();
-    let ic1_affine = G1Uncompressed::to_g1_uncompressed(ic_1).into_affine().unwrap();
+    let alpha1_affine = G1Uncompressed::from_fixed_bytes(alpha1).into_affine().unwrap();
+    let beta2_affine = G2Uncompressed::from_fixed_bytes(beta2).into_affine().unwrap();
+    let gamma2_affine = G2Uncompressed::from_fixed_bytes(gamma2).into_affine().unwrap();
+    let delta2_affine = G2Uncompressed::from_fixed_bytes(delta2).into_affine().unwrap();
+    let ic0_affine = G1Uncompressed::from_fixed_bytes(ic_0).into_affine().unwrap();
+    let ic1_affine = G1Uncompressed::from_fixed_bytes(ic_1).into_affine().unwrap();
 
     ic.push(ic0_affine);
     ic.push(ic1_affine);
