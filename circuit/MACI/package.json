@@ -1,0 +1,20 @@
+{
+  "name": "hackerlink-qf-maci",
+  "version": "1.0.0",
+  "description": "hackerlink qf maci demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Felix Cai",
+  "license": "ISC",
+  "dependencies": {
+    "blake-hash": "^2.0.0",
+    "circom": "git://github.com/weijiekoh/circomlib.git#24ed08eee0bb613b8c0135d66c1013bd9f78d50a",
+    "circomlib": "^2.0.0",
+    "csv": "^6.0.5",
+    "ethers": "^5.5.2",
+    "ffjavascript": "^0.2.46",
+    "web3": "^1.6.1"
+  }
+}
