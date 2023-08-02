@@ -1,0 +1,3 @@
+[submodule "circuit/qf-maci"]
+	path = circuit/qf-maci
+	url = https://github.com/dorahacksglobal/qf-maci.git
