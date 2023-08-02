@@ -5,7 +5,7 @@ compile_and_ts_and_witness() {
 
   cd ${circuit_dir_name}
 
-  generate inputs by js
+  # generate inputs by js
   mkdir inputs
   npm install
   node js/maci.test.js inputs
